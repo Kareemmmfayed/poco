@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.primaryHover:hover {
+  color: #ffc222;
+}
+
+.translateX {
+  transform: translateX(-100%);
+}
