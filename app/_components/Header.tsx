@@ -3,32 +3,68 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function Header() {
   const [openMenu, setOpenMenu] = useState(false);
+  const [openSearch, setOpenSearch] = useState(false);
+  const [openLogin, setOpenLogin] = useState(false);
 
-  const handleOpenMenu = () => {
-    setOpenMenu(true);
-  };
+  const menuRef = useRef<HTMLDivElement>(null);
+  const loginRef = useRef<HTMLDivElement>(null);
+  const loginBut = useRef<HTMLDivElement>(null);
 
-  const handleCloseMenu = () => {
-    setOpenMenu(false);
-  };
+  useEffect(() => {
+    function handleClickMenu(e: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setOpenMenu(false);
+      }
+    }
+
+    function handleClickLogin(e: MouseEvent) {
+      if (
+        loginRef.current &&
+        !loginRef.current.contains(e.target as Node) &&
+        loginBut.current &&
+        !loginBut.current.contains(e.target as Node)
+      ) {
+        setOpenLogin(false);
+      }
+    }
+
+    if (openMenu) {
+      document.addEventListener("mousedown", handleClickMenu);
+    }
+
+    if (openLogin) {
+      document.addEventListener("mousedown", handleClickLogin);
+    }
+
+    return () => {
+      if (openMenu) {
+        document.removeEventListener("mousedown", handleClickMenu);
+      }
+
+      if (openLogin) {
+        document.removeEventListener("mousedown", handleClickLogin);
+      }
+    };
+  }, [openMenu, openLogin]);
 
   return (
     <header className="sticky h-[90px] flex items-center justify-between w-full px-8 sm:px-16 md:px-20 lg:px-12 xl:px-20">
       <div
+        ref={menuRef}
         className={`absolute lg:hidden bg-black text-white h-screen top-0 left-0 ${
           openMenu ? "" : "translateX"
         }  w-10/12 sm:w-1/2 md:w-1/3 xl:hidden p-[10px] transition-all duration-300`}
       >
         <div className="flex justify-end">
-          <button onClick={handleCloseMenu}>
+          <button onClick={() => setOpenMenu(false)} className="primaryHover">
             <svg
               stroke="currentColor"
               fill="currentColor"
-              stroke-width="0"
+              strokeWidth="0"
               viewBox="0 0 512 512"
               className="text-xl"
               height="1em"
@@ -97,7 +133,7 @@ function Header() {
         </ul>
       </div>
 
-      <button onClick={handleOpenMenu} className="lg:hidden">
+      <button onClick={() => setOpenMenu(true)} className="lg:hidden">
         <div className="lg:hidden flex gap-[5px] flex-col">
           <div className="w-5 h-[2px] bg-black"></div>
           <div className="w-3 h-[2px] bg-black"></div>
@@ -106,7 +142,7 @@ function Header() {
       </button>
 
       <Link href={"/"}>
-        <Image src="/logo.svg" alt="logo" width={128} height={128} />
+        <Image src="/logo.svg" alt="logo" width={128} height={128} priority />
       </Link>
 
       <nav className="hidden lg:block">
@@ -136,7 +172,7 @@ function Header() {
           </li>
           <li>
             <Link href="" className="font-bold text-[16px] py-1 primaryHover">
-              Contact
+              Contact us
             </Link>
           </li>
           <li>
@@ -151,7 +187,7 @@ function Header() {
         <svg
           stroke="currentColor"
           fill="currentColor"
-          stroke-width="0"
+          strokeWidth="0"
           viewBox="0 0 24 24"
           className="text-[48px] text-[#079447]"
           height="1em"
@@ -177,38 +213,151 @@ function Header() {
         <button className="relative border rounded-full w-12 h-12 flex items-center justify-center text-xl primaryHoverBack">
           <span className="font-extrabold mb-[6px]">ع</span>
         </button>
-        <button className="relative border rounded-full w-12 h-12 flex items-center justify-center text-xl primaryHoverBack">
-          <svg
-            stroke="currentColor"
-            fill="currentColor"
-            stroke-width="0"
-            viewBox="0 0 16 16"
-            className="w-[19px] h-[19px]"
-            height="1em"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
+        <div>
+          <button
+            onClick={() => setOpenSearch(true)}
+            className="relative border rounded-full w-12 h-12 flex items-center justify-center text-xl primaryHoverBack"
           >
-            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
-          </svg>
-        </button>
-        <button className="relative border rounded-full w-12 h-12 flex items-center justify-center text-xl primaryHoverBack">
-          <svg
-            stroke="currentColor"
-            fill="currentColor"
-            stroke-width="0"
-            viewBox="0 0 24 24"
-            height="1em"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              strokeWidth="0"
+              viewBox="0 0 16 16"
+              className="w-[19px] h-[19px]"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+            </svg>
+          </button>
+
+          <div
+            className={`px-24 z-50 bg-white w-full h-full flex items-center absolute top-0 left-0 transition-all duration-300 ${
+              openSearch ? "opacity-100 visible" : "opacity-0 invisible"
+            }`}
           >
-            <path d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm9 11v-1a7 7 0 0 0-7-7h-4a7 7 0 0 0-7 7v1h2v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1z"></path>
-          </svg>
-        </button>
+            <input
+              type="text"
+              placeholder="Search products…"
+              className="w-full h-full outline-none border-none text-2xl"
+              dir="ltr"
+            ></input>
+            <button onClick={() => setOpenSearch(false)}>
+              <svg
+                stroke="currentColor"
+                fill="currentColor"
+                strokeWidth="0"
+                viewBox="0 0 1024 1024"
+                fillRule="evenodd"
+                className="text-3xl hover:text-primary-hover cursor-pointer"
+                height="1em"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M799.855 166.312c.023.007.043.018.084.059l57.69 57.69c.041.041.052.06.059.084a.118.118 0 0 1 0 .069c-.007.023-.018.042-.059.083L569.926 512l287.703 287.703c.041.04.052.06.059.083a.118.118 0 0 1 0 .07c-.007.022-.018.042-.059.083l-57.69 57.69c-.041.041-.06.052-.084.059a.118.118 0 0 1-.069 0c-.023-.007-.042-.018-.083-.059L512 569.926 224.297 857.629c-.04.041-.06.052-.083.059a.118.118 0 0 1-.07 0c-.022-.007-.042-.018-.083-.059l-57.69-57.69c-.041-.041-.052-.06-.059-.084a.118.118 0 0 1 0-.069c.007-.023.018-.042.059-.083L454.073 512 166.371 224.297c-.041-.04-.052-.06-.059-.083a.118.118 0 0 1 0-.07c.007-.022.018-.042.059-.083l57.69-57.69c.041-.041.06-.052.084-.059a.118.118 0 0 1 .069 0c.023.007.042.018.083.059L512 454.073l287.703-287.702c.04-.041.06-.052.083-.059a.118.118 0 0 1 .07 0Z"></path>
+              </svg>
+            </button>
+            <div className="bg-white w-full absolute left-0 md:top-[100px] bottom-[60px] md:bottom-[unset] px-5 max-h-[67vh] overflow-auto rounded-md"></div>
+          </div>
+        </div>
+
+        <div ref={loginBut}>
+          <button
+            onClick={() => setOpenLogin(() => !openLogin)}
+            className="relative border rounded-full w-12 h-12 flex items-center justify-center text-xl primaryHoverBack"
+          >
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              strokeWidth="0"
+              viewBox="0 0 24 24"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm9 11v-1a7 7 0 0 0-7-7h-4a7 7 0 0 0-7 7v1h2v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1z"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div
+          ref={loginRef}
+          className={`absolute top-[75px] border-t overflow-hidden duration-200 transition-all bg-white flex flex-col w-[300px] p-5 ${
+            openLogin ? "opacity-100 visible" : "opacity-0 invisible"
+          }  right-[125px] pt-5`}
+          style={{ borderTop: "1px solid #ffc222" }}
+        >
+          <div className="h-[48px]">
+            <span className="text-[18px] text-[#333]">Sign in</span>
+            <a
+              href="/en/register"
+              className="text-[14px] hover:underline rtl:mr-2 ml-2 primaryColor"
+            >
+              Create an Account
+            </a>
+          </div>
+          <form className="flex flex-col justify-between gap-4">
+            <div className="w-full">
+              <label
+                htmlFor="HeaderEmailForm"
+                className="block text-gray-700 cursor-pointer font-medium text-base mb-2"
+              >
+                email <span className="ms-1 text-red-500">*</span>
+              </label>
+              <input
+                type="email"
+                id="HeaderEmailForm"
+                placeholder="email"
+                className="mt-1 p-2 border border-border text-base placeholder-slate-400 focus:outline-none focusPrimary block w-full px-3 py-2 bg-white rounded-md"
+              ></input>
+              <div className="text-red-500 text-sm mt-1 transition-all duration-200 overflow-hidden h-0">
+                <span></span>
+              </div>
+            </div>
+            <div className="w-full">
+              <label
+                htmlFor="HeaderPasswordForm"
+                className="block text-gray-700 cursor-pointer font-medium text-base mb-2"
+              >
+                Password <span className="ms-1 text-red-500">*</span>
+              </label>
+              <input
+                type="password"
+                id="HeaderPasswordForm"
+                placeholder="Password"
+                className="mt-1 p-2 border border-border text-base placeholder-slate-400 focus:outline-none focusPrimary block w-full px-3 py-2 bg-white rounded-md"
+              ></input>
+              <div className="text-red-500 text-sm mt-1 transition-all duration-200 overflow-hidden h-0"></div>
+            </div>
+            <button
+              type="submit"
+              className="w-full cursor-pointer text-white font-bold mt-1 mb-4 py-2 px-4 rounded sm:col-span-2 bg-secondary bg-green-600 hover:bg-green-700"
+            >
+              Login
+            </button>
+          </form>
+          <div className="flex justify-center w-full my-3">
+            <button className="flex flex-row items-center gap-2 border w-fit border-gray-300 py-1 px-2 rounded-md shadow-md">
+              <Image src="/google.svg" alt="google" width={30} height={30} />
+              <p>Login with Google</p>
+            </button>
+          </div>
+          <div>
+            <a
+              href="/en/forgot-password"
+              className="text-primary-main text-[14px] hover:underline primaryColor"
+            >
+              Lost your password ?
+            </a>
+          </div>
+        </div>
+
         <button className="relative border rounded-full w-12 h-12 flex items-center justify-center text-xl primaryHoverBack">
           <svg
             stroke="currentColor"
             fill="currentColor"
-            stroke-width="0"
+            strokeWidth="0"
             viewBox="0 0 1024 1024"
             height="1em"
             width="1em"
@@ -221,7 +370,7 @@ function Header() {
           <svg
             stroke="currentColor"
             fill="currentColor"
-            stroke-width="0"
+            strokeWidth="0"
             version="1.2"
             baseProfile="tiny"
             viewBox="0 0 24 24"
