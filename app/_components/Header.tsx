@@ -9,6 +9,7 @@ function Header() {
   const [openMenu, setOpenMenu] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
+  const [openCart, setOpenCart] = useState(false);
 
   const menuRef = useRef<HTMLDivElement>(null);
   const loginRef = useRef<HTMLDivElement>(null);
@@ -50,6 +51,11 @@ function Header() {
       }
     };
   }, [openMenu, openLogin]);
+
+  const handleOpenCart = () => {
+    setOpenCart(true);
+    setOpenLogin(false);
+  };
 
   return (
     <header className="sticky h-[90px] flex items-center justify-between w-full px-8 sm:px-16 md:px-20 lg:px-12 xl:px-20">
@@ -283,7 +289,7 @@ function Header() {
 
         <div
           ref={loginRef}
-          className={`absolute top-[75px] border-t overflow-hidden duration-200 transition-all bg-white flex flex-col w-[300px] p-5 ${
+          className={`shadow absolute top-[75px] right-[50px] xl:right-[82px] border-t overflow-hidden duration-200 transition-all bg-white flex flex-col w-[300px] p-5 ${
             openLogin ? "opacity-100 visible" : "opacity-0 invisible"
           }  right-[125px] pt-5`}
           style={{ borderTop: "1px solid #ffc222" }}
@@ -366,25 +372,63 @@ function Header() {
             <path d="M923 283.6a260.04 260.04 0 0 0-56.9-82.8 264.4 264.4 0 0 0-84-55.5A265.34 265.34 0 0 0 679.7 125c-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5a258.44 258.44 0 0 0-56.9 82.8c-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3.1-35.3-7-69.6-20.9-101.9zM512 814.8S156 586.7 156 385.5C156 283.6 240.3 201 344.3 201c73.1 0 136.5 40.8 167.7 100.4C543.2 241.8 606.6 201 679.7 201c104 0 188.3 82.6 188.3 184.5 0 201.2-356 429.3-356 429.3z"></path>
           </svg>
         </button>
-        <button className="relative border rounded-full w-12 h-12 flex items-center justify-center text-xl primaryHoverBack">
-          <svg
-            stroke="currentColor"
-            fill="currentColor"
-            strokeWidth="0"
-            version="1.2"
-            baseProfile="tiny"
-            viewBox="0 0 24 24"
-            height="1em"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
+
+        <div>
+          <button
+            onClick={() => handleOpenCart()}
+            className="relative border rounded-full w-12 h-12 flex items-center justify-center text-xl primaryHoverBack"
           >
-            <g>
-              <path d="M20.756 5.345c-.191-.219-.466-.345-.756-.345h-13.819l-.195-1.164c-.08-.482-.497-.836-.986-.836h-2.25c-.553 0-1 .447-1 1s.447 1 1 1h1.403l1.86 11.164.045.124.054.151.12.179.095.112.193.13.112.065c.116.047.238.075.367.075h11.001c.553 0 1-.447 1-1s-.447-1-1-1h-10.153l-.166-1h11.319c.498 0 .92-.366.99-.858l1-7c.041-.288-.045-.579-.234-.797zm-1.909 1.655l-.285 2h-3.562v-2h3.847zm-4.847 0v2h-3v-2h3zm0 3v2h-3v-2h3zm-4-3v2h-3l-.148.03-.338-2.03h3.486zm-2.986 3h2.986v2h-2.653l-.333-2zm7.986 2v-2h3.418l-.285 2h-3.133z"></path>
-              <circle cx="8.5" cy="19.5" r="1.5"></circle>
-              <circle cx="17.5" cy="19.5" r="1.5"></circle>
-            </g>
-          </svg>
-        </button>
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              strokeWidth="0"
+              version="1.2"
+              baseProfile="tiny"
+              viewBox="0 0 24 24"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g>
+                <path d="M20.756 5.345c-.191-.219-.466-.345-.756-.345h-13.819l-.195-1.164c-.08-.482-.497-.836-.986-.836h-2.25c-.553 0-1 .447-1 1s.447 1 1 1h1.403l1.86 11.164.045.124.054.151.12.179.095.112.193.13.112.065c.116.047.238.075.367.075h11.001c.553 0 1-.447 1-1s-.447-1-1-1h-10.153l-.166-1h11.319c.498 0 .92-.366.99-.858l1-7c.041-.288-.045-.579-.234-.797zm-1.909 1.655l-.285 2h-3.562v-2h3.847zm-4.847 0v2h-3v-2h3zm0 3v2h-3v-2h3zm-4-3v2h-3l-.148.03-.338-2.03h3.486zm-2.986 3h2.986v2h-2.653l-.333-2zm7.986 2v-2h3.418l-.285 2h-3.133z"></path>
+                <circle cx="8.5" cy="19.5" r="1.5"></circle>
+                <circle cx="17.5" cy="19.5" r="1.5"></circle>
+              </g>
+            </svg>
+          </button>
+
+          <div
+            className={`fixed hidden md:block z-50 top-0 bottom-0 ${
+              openCart ? "right-0" : "translateXR"
+            } h-screen rtl:left-0 ltr:right-0 w-1/4 bg-white transition-all  translate-x-0 shadow visible`}
+          >
+            <div className="flex flex-col h-full">
+              <div className="flex flex-row justify-between py-5 px-[15px] border-b">
+                <h1 className="text-xl font-bold uppercase">Shopping Cart</h1>
+                <button
+                  onClick={() => setOpenCart(false)}
+                  className="flex flex-row items-center cursor-pointer text-bodyTextColor text-sm font-semibold"
+                >
+                  Close{" "}
+                  <svg
+                    stroke="currentColor"
+                    fill="currentColor"
+                    strokeWidth="0"
+                    viewBox="0 0 512 512"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M400 145.49L366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49z"></path>
+                  </svg>
+                </button>
+              </div>
+              <p className="text-lg text-center m-6 text-gray-500">
+                No products in the cart
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <Link

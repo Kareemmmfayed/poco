@@ -18,6 +18,10 @@
   transform: translateX(-100%);
 }
 
+.translateXR {
+  transform: translateX(100%);
+}
+
 .focusPrimary:focus {
   border: 1px solid #ffc222;
 }
