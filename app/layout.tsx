@@ -27,7 +27,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${roboto.className} m-0`}>
         <Header />
-        <main>{children}</main>
+        <main
+          style={{ background: "lightblue", width: "100vw", height: "87vh" }}
+        >
+          {children}
+        </main>
       </body>
     </html>
   );

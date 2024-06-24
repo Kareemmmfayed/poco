@@ -2,8 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+.primaryColor {
+  color: #ffc222;
+}
+
 .primaryHover:hover {
   color: #ffc222;
+}
+
+.primaryHoverBack:hover {
+  background-color: #ffc222;
 }
 
 .translateX {
