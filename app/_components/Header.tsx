@@ -2,10 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { useEffect, useRef, useState } from "react";
 
 function Header() {
+  const pathname = usePathname();
+
   const [openMenu, setOpenMenu] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
@@ -14,6 +17,12 @@ function Header() {
   const menuRef = useRef<HTMLDivElement>(null);
   const loginRef = useRef<HTMLDivElement>(null);
   const loginBut = useRef<HTMLDivElement>(null);
+  const cartRef = useRef<HTMLDivElement>(null);
+
+  const handleOpenCart = () => {
+    setOpenCart(true);
+    setOpenLogin(false);
+  };
 
   useEffect(() => {
     function handleClickMenu(e: MouseEvent) {
@@ -22,6 +31,18 @@ function Header() {
       }
     }
 
+    if (openMenu) {
+      document.addEventListener("mousedown", handleClickMenu);
+    }
+
+    return () => {
+      if (openMenu) {
+        document.removeEventListener("mousedown", handleClickMenu);
+      }
+    };
+  }, [openMenu]);
+
+  useEffect(() => {
     function handleClickLogin(e: MouseEvent) {
       if (
         loginRef.current &&
@@ -33,29 +54,42 @@ function Header() {
       }
     }
 
-    if (openMenu) {
-      document.addEventListener("mousedown", handleClickMenu);
-    }
-
     if (openLogin) {
       document.addEventListener("mousedown", handleClickLogin);
     }
 
     return () => {
-      if (openMenu) {
-        document.removeEventListener("mousedown", handleClickMenu);
-      }
-
       if (openLogin) {
         document.removeEventListener("mousedown", handleClickLogin);
       }
     };
-  }, [openMenu, openLogin]);
+  }, [openLogin]);
 
-  const handleOpenCart = () => {
-    setOpenCart(true);
+  useEffect(() => {
+    function handleClickCart(e: MouseEvent) {
+      if (cartRef.current && !cartRef.current.contains(e.target as Node)) {
+        console.log("here");
+        setOpenCart(false);
+      }
+    }
+
+    if (openCart) {
+      document.addEventListener("mousedown", handleClickCart);
+    }
+
+    return () => {
+      if (openCart) {
+        document.removeEventListener("mousedown", handleClickCart);
+      }
+    };
+  }, [openCart]);
+
+  useEffect(() => {
+    setOpenCart(false);
     setOpenLogin(false);
-  };
+    setOpenMenu(false);
+    setOpenSearch(false);
+  }, [pathname]);
 
   return (
     <header className="sticky h-[90px] flex items-center justify-between w-full px-8 sm:px-16 md:px-20 lg:px-12 xl:px-20">
@@ -84,7 +118,7 @@ function Header() {
         <ul>
           <li>
             <Link
-              href=""
+              href="/"
               className="border-b block primaryHover p-[7.5px]"
               style={{ borderColor: "#808080" }}
             >
@@ -93,7 +127,7 @@ function Header() {
           </li>
           <li>
             <Link
-              href=""
+              href="/menu"
               className="border-b border-headingTextColor block  primaryHover p-[7.5px]"
               style={{ borderColor: "#808080" }}
             >
@@ -102,7 +136,7 @@ function Header() {
           </li>
           <li>
             <Link
-              href=""
+              href="/about-us"
               className="border-b border-headingTextColor block  primaryHover p-[7.5px]"
               style={{ borderColor: "#808080" }}
             >
@@ -111,7 +145,7 @@ function Header() {
           </li>
           <li>
             <Link
-              href=""
+              href="/blog"
               className="border-b border-headingTextColor block  primaryHover p-[7.5px]"
               style={{ borderColor: "#808080" }}
             >
@@ -120,16 +154,16 @@ function Header() {
           </li>
           <li>
             <Link
-              href=""
+              href="/contact-us"
               className="border-b border-headingTextColor block  primaryHover p-[7.5px]"
               style={{ borderColor: "#808080" }}
             >
-              Contact
+              Contact us
             </Link>
           </li>
           <li>
             <Link
-              href=""
+              href="/faq"
               className="border-b border-headingTextColor block  primaryHover p-[7.5px]"
               style={{ borderColor: "#808080" }}
             >
@@ -156,33 +190,60 @@ function Header() {
           <li>
             <Link
               href="/"
-              className="primaryColor font-bold text-[16px] py-1 primaryHover"
+              className={`font-bold text-[16px] py-1 primaryHover ${
+                pathname === "/" ? "primaryColor" : ""
+              }`}
             >
               Home
             </Link>
           </li>
           <li>
-            <Link href="" className="font-bold text-[16px] py-1 primaryHover">
+            <Link
+              href="/menu"
+              className={`font-bold text-[16px] py-1 primaryHover ${
+                pathname === "/menu" ? "primaryColor" : ""
+              }`}
+            >
               Menu
             </Link>
           </li>
           <li>
-            <Link href="" className="font-bold text-[16px] py-1 primaryHover">
+            <Link
+              href="/about-us"
+              className={`font-bold text-[16px] py-1 primaryHover ${
+                pathname === "/about-us" ? "primaryColor" : ""
+              }`}
+            >
               About us
             </Link>
           </li>
           <li>
-            <Link href="" className="font-bold text-[16px] py-1 primaryHover">
+            <Link
+              href="/blog"
+              className={`font-bold text-[16px] py-1 primaryHover ${
+                pathname === "/blog" ? "primaryColor" : ""
+              }`}
+            >
               Blog
             </Link>
           </li>
           <li>
-            <Link href="" className="font-bold text-[16px] py-1 primaryHover">
+            <Link
+              href="/contact-us"
+              className={`font-bold text-[16px] py-1 primaryHover ${
+                pathname === "/contact-us" ? "primaryColor" : ""
+              }`}
+            >
               Contact us
             </Link>
           </li>
           <li>
-            <Link href="" className="font-bold text-[16px] py-1 primaryHover">
+            <Link
+              href="/faq"
+              className={`font-bold text-[16px] py-1 primaryHover ${
+                pathname === "/faq" ? "primaryColor" : ""
+              }`}
+            >
               Faq
             </Link>
           </li>
@@ -296,12 +357,12 @@ function Header() {
         >
           <div className="h-[48px]">
             <span className="text-[18px] text-[#333]">Sign in</span>
-            <a
-              href="/en/register"
+            <Link
+              href="/register"
               className="text-[14px] hover:underline rtl:mr-2 ml-2 primaryColor"
             >
               Create an Account
-            </a>
+            </Link>
           </div>
           <form className="flex flex-col justify-between gap-4">
             <div className="w-full">
@@ -350,12 +411,12 @@ function Header() {
             </button>
           </div>
           <div>
-            <a
-              href="/en/forgot-password"
+            <Link
+              href="/forgot-password"
               className="text-primary-main text-[14px] hover:underline primaryColor"
             >
               Lost your password ?
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -398,6 +459,7 @@ function Header() {
           </button>
 
           <div
+            ref={cartRef}
             className={`fixed hidden md:block z-50 top-0 bottom-0 ${
               openCart ? "right-0" : "translateXR"
             } h-screen rtl:left-0 ltr:right-0 w-1/4 bg-white transition-all  translate-x-0 shadow visible`}
