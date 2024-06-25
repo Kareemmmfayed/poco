@@ -2,8 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .primaryColor {
   color: #ffc222;
+}
+
+.bg-primary {
+  background-color: #ffc222;
 }
 
 .primaryHover:hover {

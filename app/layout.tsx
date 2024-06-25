@@ -8,6 +8,7 @@ const roboto = Roboto({
 
 import "./style.css";
 import Header from "./_components/Header";
+import Footer from "./_components/Footer";
 
 export const metadata: Metadata = {
   title: {
@@ -27,11 +28,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${roboto.className} m-0`}>
         <Header />
-        <main
-          style={{ background: "lightblue", width: "100vw", height: "87vh" }}
-        >
+        <main style={{ background: "lightblue", height: "87px" }}>
           {children}
         </main>
+        <Footer />
       </body>
     </html>
   );
