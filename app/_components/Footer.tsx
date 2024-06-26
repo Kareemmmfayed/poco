@@ -3,7 +3,8 @@ import Image from "next/image";
 function Footer() {
   return (
     <div className="w-full">
-      <div className="bg-[#181818] text-center py-[100px] text-[15px] max-md:py-[70px]">
+      <div className="bg-[#181818] text-center py-[100px] text-[15px] max-md:py-[70px] relative overflow-hidden">
+        <span className="bg-[#303030] absolute w-full h-[1px] left-0 mt-6"></span>
         <div className="flex items-center justify-center mb-[85px] relative max-md:mb-[60px]">
           <span className="bg-[#181818] block px-[32px] relative">
             <Image
@@ -16,7 +17,7 @@ function Footer() {
             ></Image>
           </span>
         </div>
-        <div className="mx-auto px-4">
+        <div className="px-16 mx-auto">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 md:gap-2 lg:gap-4">
             <div className="max-lg:mb-[20px]">
               <h3 className="heading text-xl text-[20px] font-bold uppercase text-white mb-[20px] mx-lg:text-[18px]">
@@ -56,7 +57,7 @@ function Footer() {
               <h3 className="heading text-xl text-[20px] font-bold uppercase text-white mb-[20px] mx-lg:text-[18px]">
                 NewsLetter
               </h3>
-              <p className="w-[85%] m-auto text-[15px] text-white leading-7 max-lg:w-full">
+              <p className="w-[85%] m-auto text-[15px] text-[#808080] leading-7 max-lg:w-full">
                 Subscribe to the weekly newsletter for all the latest updates
               </p>
               <div className="newsletter mt-[20px]">
