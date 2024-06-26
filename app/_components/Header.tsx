@@ -5,6 +5,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { useEffect, useRef, useState } from "react";
+import { useOverlay } from "./useOverlay";
+import { useClickAway } from "./useClickAway";
+import { useClickAwayCart } from "./useClickAwayCart";
 
 function Header() {
   const pathname = usePathname();
@@ -24,65 +27,13 @@ function Header() {
     setOpenLogin(false);
   };
 
-  useEffect(() => {
-    function handleClickMenu(e: MouseEvent) {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
-        setOpenMenu(false);
-      }
-    }
+  useOverlay(openMenu);
+  useOverlay(openSearch);
+  useOverlay(openCart);
 
-    if (openMenu) {
-      document.addEventListener("mousedown", handleClickMenu);
-    }
-
-    return () => {
-      if (openMenu) {
-        document.removeEventListener("mousedown", handleClickMenu);
-      }
-    };
-  }, [openMenu]);
-
-  useEffect(() => {
-    function handleClickLogin(e: MouseEvent) {
-      if (
-        loginRef.current &&
-        !loginRef.current.contains(e.target as Node) &&
-        loginBut.current &&
-        !loginBut.current.contains(e.target as Node)
-      ) {
-        setOpenLogin(false);
-      }
-    }
-
-    if (openLogin) {
-      document.addEventListener("mousedown", handleClickLogin);
-    }
-
-    return () => {
-      if (openLogin) {
-        document.removeEventListener("mousedown", handleClickLogin);
-      }
-    };
-  }, [openLogin]);
-
-  useEffect(() => {
-    function handleClickCart(e: MouseEvent) {
-      if (cartRef.current && !cartRef.current.contains(e.target as Node)) {
-        console.log("here");
-        setOpenCart(false);
-      }
-    }
-
-    if (openCart) {
-      document.addEventListener("mousedown", handleClickCart);
-    }
-
-    return () => {
-      if (openCart) {
-        document.removeEventListener("mousedown", handleClickCart);
-      }
-    };
-  }, [openCart]);
+  useClickAway(openMenu, setOpenMenu, menuRef);
+  useClickAway(openCart, setOpenCart, cartRef);
+  useClickAwayCart(openLogin, setOpenLogin, loginRef, loginBut);
 
   useEffect(() => {
     setOpenCart(false);
@@ -92,7 +43,7 @@ function Header() {
   }, [pathname]);
 
   return (
-    <header className="sticky h-[90px] flex items-center justify-between w-full px-8 sm:px-16 md:px-20 lg:px-12 xl:px-20">
+    <header className="z-10 sticky h-[90px] flex items-center justify-between w-full px-8 sm:px-16 md:px-20 lg:px-12 xl:px-20">
       <div
         ref={menuRef}
         className={`absolute lg:hidden bg-black text-white h-screen top-0 left-0 ${
