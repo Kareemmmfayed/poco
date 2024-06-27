@@ -51,7 +51,10 @@ function Header() {
         }  w-10/12 sm:w-1/2 md:w-1/3 xl:hidden p-[10px] transition-all duration-300`}
       >
         <div className="flex justify-end">
-          <button onClick={() => setOpenMenu(false)} className="primaryHover">
+          <button
+            onClick={() => setOpenMenu(false)}
+            className="hover:text-[#ffc222]"
+          >
             <svg
               stroke="currentColor"
               fill="currentColor"
@@ -70,7 +73,7 @@ function Header() {
           <li>
             <Link
               href="/"
-              className="border-b block primaryHover p-[7.5px]"
+              className="border-b block hover:text-[#ffc222] p-[7.5px]"
               style={{ borderColor: "#808080" }}
             >
               Home
@@ -79,7 +82,7 @@ function Header() {
           <li>
             <Link
               href="/menu"
-              className="border-b border-headingTextColor block  primaryHover p-[7.5px]"
+              className="border-b block  hover:text-[#ffc222] p-[7.5px]"
               style={{ borderColor: "#808080" }}
             >
               Menu
@@ -88,7 +91,7 @@ function Header() {
           <li>
             <Link
               href="/about-us"
-              className="border-b border-headingTextColor block  primaryHover p-[7.5px]"
+              className="border-b block  hover:text-[#ffc222] p-[7.5px]"
               style={{ borderColor: "#808080" }}
             >
               About us
@@ -97,7 +100,7 @@ function Header() {
           <li>
             <Link
               href="/blog"
-              className="border-b border-headingTextColor block  primaryHover p-[7.5px]"
+              className="border-b block  hover:text-[#ffc222] p-[7.5px]"
               style={{ borderColor: "#808080" }}
             >
               Blog
@@ -106,7 +109,7 @@ function Header() {
           <li>
             <Link
               href="/contact-us"
-              className="border-b border-headingTextColor block  primaryHover p-[7.5px]"
+              className="border-b block  hover:text-[#ffc222] p-[7.5px]"
               style={{ borderColor: "#808080" }}
             >
               Contact us
@@ -115,7 +118,7 @@ function Header() {
           <li>
             <Link
               href="/faq"
-              className="border-b border-headingTextColor block  primaryHover p-[7.5px]"
+              className="border-b block  hover:text-[#ffc222] p-[7.5px]"
               style={{ borderColor: "#808080" }}
             >
               Faq
@@ -141,8 +144,8 @@ function Header() {
           <li>
             <Link
               href="/"
-              className={`font-bold text-[16px] py-1 primaryHover ${
-                pathname === "/" ? "primaryColor" : ""
+              className={`font-bold text-[16px] py-1 hover:text-[#ffc222] ${
+                pathname === "/" ? "text-[#ffc222]" : ""
               }`}
             >
               Home
@@ -151,8 +154,8 @@ function Header() {
           <li>
             <Link
               href="/menu"
-              className={`font-bold text-[16px] py-1 primaryHover ${
-                pathname === "/menu" ? "primaryColor" : ""
+              className={`font-bold text-[16px] py-1 hover:text-[#ffc222] ${
+                pathname === "/menu" ? "text-[#ffc222]" : ""
               }`}
             >
               Menu
@@ -161,8 +164,8 @@ function Header() {
           <li>
             <Link
               href="/about-us"
-              className={`font-bold text-[16px] py-1 primaryHover ${
-                pathname === "/about-us" ? "primaryColor" : ""
+              className={`font-bold text-[16px] py-1 hover:text-[#ffc222] ${
+                pathname === "/about-us" ? "text-[#ffc222]" : ""
               }`}
             >
               About us
@@ -171,8 +174,8 @@ function Header() {
           <li>
             <Link
               href="/blog"
-              className={`font-bold text-[16px] py-1 primaryHover ${
-                pathname === "/blog" ? "primaryColor" : ""
+              className={`font-bold text-[16px] py-1 hover:text-[#ffc222] ${
+                pathname === "/blog" ? "text-[#ffc222]" : ""
               }`}
             >
               Blog
@@ -181,8 +184,8 @@ function Header() {
           <li>
             <Link
               href="/contact-us"
-              className={`font-bold text-[16px] py-1 primaryHover ${
-                pathname === "/contact-us" ? "primaryColor" : ""
+              className={`font-bold text-[16px] py-1 hover:text-[#ffc222] ${
+                pathname === "/contact-us" ? "text-[#ffc222]" : ""
               }`}
             >
               Contact us
@@ -191,8 +194,8 @@ function Header() {
           <li>
             <Link
               href="/faq"
-              className={`font-bold text-[16px] py-1 primaryHover ${
-                pathname === "/faq" ? "primaryColor" : ""
+              className={`font-bold text-[16px] py-1 hover:text-[#ffc222] ${
+                pathname === "/faq" ? "text-[#ffc222]" : ""
               }`}
             >
               Faq
@@ -221,20 +224,20 @@ function Header() {
           <span className="text-gray-400 text-[13px] font-medium">
             Call and Order in
           </span>
-          <p className="primaryColor text-[20px] font-bold leading-[1em]">
+          <p className="text-[#ffc222] text-[20px] font-bold leading-[1em]">
             01212312312
           </p>
         </div>
       </Link>
 
       <div className="hidden lg:flex gap-4 ">
-        <button className="relative border rounded-full w-12 h-12 flex items-center justify-center text-xl primaryHoverBack">
+        <button className="relative border rounded-full w-12 h-12 flex items-center justify-center text-xl hover:bg-[#ffc222]">
           <span className="font-extrabold mb-[6px]">ع</span>
         </button>
         <div>
           <button
             onClick={() => setOpenSearch(true)}
-            className="relative border rounded-full w-12 h-12 flex items-center justify-center text-xl primaryHoverBack"
+            className="relative border rounded-full w-12 h-12 flex items-center justify-center text-xl hover:bg-[#ffc222]"
           >
             <svg
               stroke="currentColor"
@@ -268,7 +271,7 @@ function Header() {
                 strokeWidth="0"
                 viewBox="0 0 1024 1024"
                 fillRule="evenodd"
-                className="text-3xl hover:text-primary-hover cursor-pointer"
+                className="text-3xl hover:text-[#ffc222] cursor-pointer"
                 height="1em"
                 width="1em"
                 xmlns="http://www.w3.org/2000/svg"
@@ -283,7 +286,7 @@ function Header() {
         <div ref={loginBut}>
           <button
             onClick={() => setOpenLogin(() => !openLogin)}
-            className="relative border rounded-full w-12 h-12 flex items-center justify-center text-xl primaryHoverBack"
+            className="relative border rounded-full w-12 h-12 flex items-center justify-center text-xl hover:bg-[#ffc222]"
           >
             <svg
               stroke="currentColor"
@@ -310,7 +313,7 @@ function Header() {
             <span className="text-[18px] text-[#333]">Sign in</span>
             <Link
               href="/register"
-              className="text-[14px] hover:underline rtl:mr-2 ml-2 primaryColor"
+              className="text-[14px] hover:underline rtl:mr-2 ml-2 text-[#ffc222]"
             >
               Create an Account
             </Link>
@@ -364,14 +367,14 @@ function Header() {
           <div>
             <Link
               href="/forgot-password"
-              className="text-primary-main text-[14px] hover:underline primaryColor"
+              className="text-primary-main text-[14px] hover:underline text-[#ffc222]"
             >
               Lost your password ?
             </Link>
           </div>
         </div>
 
-        <button className="relative border rounded-full w-12 h-12 flex items-center justify-center text-xl primaryHoverBack">
+        <button className="relative border rounded-full w-12 h-12 flex items-center justify-center text-xl hover:bg-[#ffc222]">
           <svg
             stroke="currentColor"
             fill="currentColor"
@@ -388,7 +391,7 @@ function Header() {
         <div>
           <button
             onClick={() => handleOpenCart()}
-            className="relative border rounded-full w-12 h-12 flex items-center justify-center text-xl primaryHoverBack"
+            className="relative border rounded-full w-12 h-12 flex items-center justify-center text-xl hover:bg-[#ffc222]"
           >
             <svg
               stroke="currentColor"
@@ -446,7 +449,7 @@ function Header() {
 
       <Link
         href={"/"}
-        className="lg:hidden cursor-pointer text-[35px] hover:bg-primary_hover"
+        className="lg:hidden cursor-pointer text-[35px] hover:bg-[#ffc222]"
       >
         <svg
           stroke="currentColor"

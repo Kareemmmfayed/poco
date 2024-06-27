@@ -8,21 +8,6 @@
   box-sizing: border-box;
 }
 
-.primaryColor {
-  color: #ffc222;
-}
-
-.bg-primary {
-  background-color: #ffc222;
-}
-
-.primaryHover:hover {
-  color: #ffc222;
-}
-
-.primaryHoverBack:hover {
-  background-color: #ffc222;
-}
 
 .translateX {
   transform: translateX(-100%);

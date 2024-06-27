@@ -9,6 +9,7 @@ const roboto = Roboto({
 import "./style.css";
 import Header from "./_components/Header";
 import Footer from "./_components/Footer";
+import BottomNav from "./_components/BottomNav";
 
 export const metadata: Metadata = {
   title: {
@@ -35,6 +36,7 @@ export default function RootLayout({
           </div>
         </main>
         <Footer />
+        <BottomNav />
       </body>
     </html>
   );
