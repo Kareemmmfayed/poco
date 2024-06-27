@@ -86,8 +86,8 @@ function Footer() {
       <footer className="bg-[#00a149] flex items-center justify-center">
         <div className="flex items-center py-7">
           <p className="text-[13px] sm:text-[14px] font-normal text-white">
-            Made by <span className="primaryColor">Kareem Fayed</span> &{" "}
-            <span className="primaryColor"> Mahmoud Radwan</span>
+            Made by <span className="text-[#ffc222]">Kareem Fayed</span> &{" "}
+            <span className="text-[#ffc222]"> Mahmoud Radwan</span>
           </p>
         </div>
       </footer>
