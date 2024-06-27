@@ -72,7 +72,7 @@ function Footer() {
                     ></input>
                     <button
                       type="submit"
-                      className="rounded uppercase font-semibold px-[15px] text-[#1e1d23] bg-primary hover:bg-primary-hover hover:text-white duration-700 transition-all ease-in-out max-2xl:px-[8px] max-xl:px-[5px] max-xl:text-[13px] max-lg:px-[15px] max-lg:text-[14px]"
+                      className="rounded uppercase font-semibold px-[15px] text-[#1e1d23] bg-[#ffc222] hover:bg-[#ffc222] hover:text-white duration-700 transition-all ease-in-out max-2xl:px-[8px] max-xl:px-[5px] max-xl:text-[13px] max-lg:px-[15px] max-lg:text-[14px]"
                     >
                       Subscribe
                     </button>
@@ -91,6 +91,7 @@ function Footer() {
           </p>
         </div>
       </footer>
+      <div className="lg:hidden h-[60px]"></div>
     </div>
   );
 }
