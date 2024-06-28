@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { useEffect, useRef, useState } from "react";
 import { useOverlay } from "./useOverlay";
@@ -11,6 +11,9 @@ import { useClickAwayCart } from "./useClickAwayCart";
 
 function Header() {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const [en, setEn] = useState(true);
 
   const [openMenu, setOpenMenu] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
@@ -25,6 +28,14 @@ function Header() {
   const handleOpenCart = () => {
     setOpenCart(true);
     setOpenLogin(false);
+  };
+
+  const handleChangeLanguage = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setEn((prev) => !prev);
+    const nextLocale = en ? "en" : "ar";
+    console.log(nextLocale);
+    // router.replace(`/${nextLocale}`);
   };
 
   useOverlay(openMenu);
@@ -231,8 +242,11 @@ function Header() {
       </Link>
 
       <div className="hidden lg:flex gap-4 ">
-        <button className="relative border rounded-full w-12 h-12 flex items-center justify-center text-xl hover:bg-[#ffc222]">
-          <span className="font-extrabold mb-[6px]">ع</span>
+        <button
+          className="relative border rounded-full w-12 h-12 flex items-center justify-center text-xl hover:bg-[#ffc222]"
+          onClick={handleChangeLanguage}
+        >
+          <span className="font-extrabold mb-[6px]">{en ? "ع" : "En"}</span>
         </button>
         <div>
           <button
