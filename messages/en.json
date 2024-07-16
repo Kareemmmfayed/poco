@@ -1,5 +1,22 @@
 {
-  "Index": {
-    "title": "Hello world!"
+  "Header": {
+    "home": "Home",
+    "menu": "Menu",
+    "about-us": "About us",
+    "blog": "Blog",
+    "contact-us": "Contact us",
+    "faq": "Faq",
+    "call": "Call and Order in",
+    "search": "Search products...",
+    "sign-in": "Sign in",
+    "create-account": "Create an Account",
+    "email": "email",
+    "password": "password",
+    "login": "Login",
+    "login-go": "Login with Google",
+    "lost-password": "Lost your password ?",
+    "cart": "Shopping Cart",
+    "no-products": "No products in the cart",
+    "close": "close"
   }
 }
